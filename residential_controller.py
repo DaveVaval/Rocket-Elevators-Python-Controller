@@ -7,7 +7,7 @@ class Column:
         self.amountOfElevators = amountOfElevators
         self.callButtonList = []
         self.elevatorList = []
-         
+         # On initiation the column will create it's call buttons
         for number in range(self.amountOfFloors):
             buttonFloor = 1
             buttonID = 1 
@@ -20,20 +20,20 @@ class Column:
                 self.callButtonList.append(callButton)
                 buttonID += 1
             buttonFloor += 1
-            
+        # On initiation the column will create it's elevators    
         for number in range(self.amountOfElevators):
             elevatorID = 1
             elevator = Elevator(elevatorID, 'idle', self.amountOfFloors, 1)
             self.elevatorList.append(elevator)
             elevatorID += 1
-            
+     # This method will be called whenever a user requests an elevator       
     def requestElevator(self, requestedFloor, direction):
         elevator = self.findElevator(requestedFloor, direction)
         elevator.floorRequestList.append(requestedFloor)
         elevator.move()
         elevator.openDoors()
         return elevator
-    
+    # Finding the best elevator is managed by this method
     def findElevator(self, requestedFloor, requestedDirection):
         elevatorInfo = {
             "bestElevator": None,
@@ -78,7 +78,7 @@ class Elevator:
         self.door = Doors(id, 'closed')
         self.floorRequestButtonList = []
         self.floorRequestList = []
-        
+        # On initiation the elevator will create it's own buttons
         for number in range(self.amountOfFloors):
             floorNumber = 1
             floorRequestButtonID = 1
@@ -86,7 +86,8 @@ class Elevator:
             self.floorRequestButtonList.append(floorButton)
             floorNumber += 1
             floorRequestButtonID += 1
-    
+    # This method will push the requested floor to the request list
+    # and calls the elevator to move and open it's doors 
     def requestFloor(self, floor):
         self.floorRequestList.append(floor)
         self.sortFloorRequestList()
@@ -106,13 +107,13 @@ class Elevator:
                 while self.currentFloor > destination:
                     self.currentFloor -= 1
             self.status = 'idle'
-            self.floorRequestList.pop(0)
+            self.floorRequestList.pop(0) # Once the floor is reached it will delete the floor from the request List
         
     def sortFloorRequestList(self):
         if self.direction == 'up':
-            self.floorRequestList.sort()
+            self.floorRequestList.sort() # This will sort the request list ascending
         else:
-            self.floorRequestList.sort(reverse=True)
+            self.floorRequestList.sort(reverse=True) # This will sort the request list descending
             
     def openDoors(self):
         self.door.status = 'open'
