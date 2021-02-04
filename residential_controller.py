@@ -36,13 +36,35 @@ class Column:
     
     def findElevator(self, requestedFloor, requestedDirection):
         elevatorInfo = {
-            bestElevator: None,
-            bestScore: 5,
-            referenceGab: float('inf')
+            "bestElevator": None,
+            "bestScore": 5,
+            "referenceGap": float('inf')
         }
-        
- 
- 
+        for elevator in self.elevatorList:
+            if requestedFloor == elevator.currentFloor and elevator.status == 'idle' and requestedDirection == elevator.direction:
+                elevatorInfo = self.checkElevator(1, elevator, elevatorInfo, requestedFloor)
+            elif requestedFloor > elevator.currentFloor and elevator.direction == 'up' and requestedDirection == elevator.direction:
+                elevatorInfo = self.checkElevator(2, elevator, elevatorInfo, requestedFloor)
+            elif requestedFloor < elevator.currentFloor and elevator.direction == 'down' and requestedDirection == elevator.direction:
+                elevatorInfo = self.checkElevator(2, elevator, elevatorInfo, requestedFloor)
+            elif elevator.status == 'idle':
+                elevatorInfo = self.checkElevator(3, elevator, elevatorInfo, requestedFloor)
+            else:
+                elevatorInfo = self.checkElevator(4, elevator, elevatorInfo, requestedFloor)
+        return elevatorInfo.bestElevator
+    
+    def checkElevator(self, baseScore, elevator, elevatorInfo, floor):
+        if baseScore < elevatorInfo.bestScore:
+            elevatorInfo.bestScore = baseScore
+            elevatorInfo.bestElevator = elevator
+            elevatorInfo.referenceGap = abs(elevator.currentFloor - floor)
+        elif elevatorInfo.bestScore == baseScore:
+            gap = abs(elevator.currentFloor - floor)
+            if elevatorInfo.referenceGap > gap:
+                elevatorInfo.bestScore = baseScore
+                elevatorInfo.bestElevator = elevator
+                elevatorInfo.referenceGap = gap
+        return elevatorInfo
  
         
 # Elevator
@@ -137,3 +159,23 @@ class Doors:
 # l = [10, 2, 28, 15]
 # l.sort(reverse=True)
 # print(l)
+
+# class lol:
+#     def __init__(self, id, num):
+#         self.number = num
+#         self.id = id
+#         self.lolList = []
+        
+#         for number in range(self.number):
+#             nlol = what()
+#             self.lolList.append(nlol)
+    
+# class what:
+#     def __init__(self):
+#         self.state = 'the fuck'
+        
+
+# newlol = lol(1, 4)
+
+# for nlol in newlol.lolList:
+#     print(nlol.state)
