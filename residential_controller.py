@@ -51,19 +51,19 @@ class Column:
                 elevatorInfo = self.checkElevator(3, elevator, elevatorInfo, requestedFloor)
             else:
                 elevatorInfo = self.checkElevator(4, elevator, elevatorInfo, requestedFloor)
-        return elevatorInfo.bestElevator
+        return elevatorInfo["bestElevator"]
     
     def checkElevator(self, baseScore, elevator, elevatorInfo, floor):
-        if baseScore < elevatorInfo.bestScore:
-            elevatorInfo.bestScore = baseScore
-            elevatorInfo.bestElevator = elevator
-            elevatorInfo.referenceGap = abs(elevator.currentFloor - floor)
-        elif elevatorInfo.bestScore == baseScore:
+        if baseScore < elevatorInfo["bestScore"]:
+            elevatorInfo["bestScore"] = baseScore
+            elevatorInfo["bestElevator"] = elevator
+            elevatorInfo["referenceGap"] = abs(elevator.currentFloor - floor)
+        elif elevatorInfo["bestScore"] == baseScore:
             gap = abs(elevator.currentFloor - floor)
-            if elevatorInfo.referenceGap > gap:
-                elevatorInfo.bestScore = baseScore
-                elevatorInfo.bestElevator = elevator
-                elevatorInfo.referenceGap = gap
+            if elevatorInfo["referenceGap"] > gap:
+                elevatorInfo["bestScore"] = baseScore
+                elevatorInfo["bestElevator"] = elevator
+                elevatorInfo["referenceGap"] = gap
         return elevatorInfo
  
         
@@ -142,40 +142,53 @@ class Doors:
         
         
 #----------------------------------------------------------------// Testing //--------------------------------------------------------------------------
+# Creating an instance of Column
+column = Column(1, 'online', 10, 2)
 
-# testColumn = Column(1, 'online', 10, 2)            
-# print(len(testColumn.callButtonList))
-# print(testColumn.callButtonList[0].status)
-# print(len(testColumn.elevatorList))
-# print(testColumn.elevatorList)
-# print(testColumn.__dict__)
-
-# testElevator = Elevator(1, 'lol', 5, 1)
-# testElevator.floorRequestList = [10, 4, 22, 15]
-# testElevator.direction = 'up'
-# testElevator.sortFloorRequestList()
-# print(testElevator.floorRequestList)
-
-# l = [10, 2, 28, 15]
-# l.sort(reverse=True)
-# print(l)
-
-# class lol:
-#     def __init__(self, id, num):
-#         self.number = num
-#         self.id = id
-#         self.lolList = []
-        
-#         for number in range(self.number):
-#             nlol = what()
-#             self.lolList.append(nlol)
+def Scenario1():
+    # Setting the base values for this scenario
+    column.elevatorList[0].currentFloor = 2
+    column.elevatorList[1].currentFloor = 6
+    print('User is on floor 3 and wants to go up to floor 7')
+    elevator = column.requestElevator(3, 'up')
+    print('Elevator A is sent to floor:', column.elevatorList[0].currentFloor)
+    print('User enters the elevator and presses of floor 7')
+    elevator.requestFloor(7)
+    print('...')
+    print('User reaches floor', column.elevatorList[0].currentFloor, 'and gets out')
     
-# class what:
-#     def __init__(self):
-#         self.state = 'the fuck'
-        
-
-# newlol = lol(1, 4)
-
-# for nlol in newlol.lolList:
-#     print(nlol.state)
+def Scenario2():
+    # Setting the base values for this Scenario
+    column.elevatorList[0].currentFloor = 10
+    column.elevatorList[1].currentFloor = 3
+    print('User is on floor 1 and wants to go up to floor 6')
+    elevator = column.requestElevator(6, 'up')
+    print('Elevator B is sent to floor:', column.elevatorList[1].currentFloor)
+    print('User enters the elevator and presses of floor 6')
+    elevator.requestFloor(6)
+    print('...')
+    print('User reaches floor', column.elevatorList[1].currentFloor, 'and gets out')
+    print()
+    print('2 minutes later...')
+    print()
+    print('Another user is on floor 3 and wants to go up to floor 5')
+    elevator = column.requestElevator(5, 'up')
+    print('Elevator B is sent to floor:', column.elevatorList[1].currentFloor)
+    print('User enters the elevator and presses of floor 5')
+    elevator.requestFloor(5)
+    print('...')
+    print('User reaches floor', column.elevatorList[1].currentFloor, 'and gets out')
+    print()
+    print('Some time after...')
+    print()
+    print('Another user is on floor 9 and wants to go up to floor 2')
+    elevator = column.requestElevator(9, 'down')
+    print('Elevator A is sent to floor:', column.elevatorList[0].currentFloor)
+    print('User enters the elevator and presses of floor 2')
+    elevator.requestFloor(2)
+    print('...')
+    print('User reaches floor', column.elevatorList[0].currentFloor, 'and gets out')
+    
+def Scenario3():
+    # Setting the base values for this Scenario
+    
