@@ -191,4 +191,27 @@ def Scenario2():
     
 def Scenario3():
     # Setting the base values for this Scenario
+    column.elevatorList[0].currentFloor = 10
+    column.elevatorList[0].direction = 'down'
+    column.elevatorList[1].currentFloor = 3
+    print('User is on floor 3 and wants to go up to floor 2')
+    print('Elevator A is on floor 10 and Elevator B is currently moving from floor 3 to 6')
+    column.elevatorList[1].requestFloor(6)
+    elevator = column.requestElevator(3, 'down')
+    print('Elevator A is sent to floor:', column.elevatorList[0].currentFloor)
+    print('User enters the elevator and presses of floor 2')
+    elevator.requestFloor(2)
+    print('...')
+    print('User reaches floor', column.elevatorList[0].currentFloor, 'and gets out')
+    print()
+    print('5 minutes later...')
+    print()
+    print('Another user is on floor 10 and wants to go up to floor 3')
+    elevator = column.requestElevator(10, 'down')
+    print('Elevator B is sent to floor:', column.elevatorList[1].currentFloor)
+    print('User enters the elevator and presses of floor 2')
+    elevator.requestFloor(2)
+    print('...')
+    print('User reaches floor', column.elevatorList[1].currentFloor, 'and gets out')
     
+Scenario3()
