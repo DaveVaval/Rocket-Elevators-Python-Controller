@@ -27,7 +27,24 @@ class Column:
             self.elevatorList.append(elevator)
             elevatorID += 1
             
-            
+    def requestElevator(self, requestedFloor, direction):
+        elevator = self.findElevator(requestedFloor, direction)
+        elevator.floorRequestList.append(requestedFloor)
+        elevator.move()
+        elevator.openDoors()
+        return elevator
+    
+    def findElevator(self, requestedFloor, requestedDirection):
+        elevatorInfo = {
+            bestElevator: None,
+            bestScore: 5,
+            referenceGab: float('inf')
+        }
+        
+ 
+ 
+ 
+        
 # Elevator
 class Elevator:
     def __init__(self, id, status, amountOfFloors, currentFloor):
@@ -47,6 +64,12 @@ class Elevator:
             self.floorRequestButtonList.append(floorButton)
             floorNumber += 1
             floorRequestButtonID += 1
+    
+    def requestFloor(self, floor):
+        self.floorRequestList.append(floor)
+        self.sortFloorRequestList()
+        self.move()
+        self.openDoors()
             
     def move(self):
         while len(self.floorRequestList) != 0:
@@ -65,11 +88,14 @@ class Elevator:
         
     def sortFloorRequestList(self):
         if self.direction == 'up':
-            sorted(self.floorRequestList, key=int)
+            self.floorRequestList.sort()
         else:
-            sorted(self.floorRequestList, key=int, reverse=True)
+            self.floorRequestList.sort(reverse=True)
             
-
+    def openDoors(self):
+        self.door.status = 'open'
+        self.door.status = 'closed'
+            
 # Call Button
 class CallButton:
     def __init__(self, id, status, floor, direction):
@@ -102,8 +128,12 @@ class Doors:
 # print(testColumn.elevatorList)
 # print(testColumn.__dict__)
 
-testElevator = Elevator(1, 'lol', 5, 1)
-testElevator.direction = 'down'
-testElevator.floorRequestList = [1, 4, 5, 7]
-testElevator.sortFloorRequestList()
-print(testElevator.floorRequestList)
+# testElevator = Elevator(1, 'lol', 5, 1)
+# testElevator.floorRequestList = [10, 4, 22, 15]
+# testElevator.direction = 'up'
+# testElevator.sortFloorRequestList()
+# print(testElevator.floorRequestList)
+
+# l = [10, 2, 28, 15]
+# l.sort(reverse=True)
+# print(l)
