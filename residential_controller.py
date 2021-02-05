@@ -7,10 +7,10 @@ class Column:
         self.amountOfElevators = amountOfElevators
         self.callButtonList = []
         self.elevatorList = []
+        buttonFloor = 1
+        buttonID = 1 
          # On initiation the column will create it's call buttons
         for number in range(self.amountOfFloors):
-            buttonFloor = 1
-            buttonID = 1 
             if buttonFloor < self.amountOfFloors:
                 callButton = CallButton(buttonID, 'off', buttonFloor, 'up')
                 self.callButtonList.append(callButton)
@@ -21,8 +21,8 @@ class Column:
                 buttonID += 1
             buttonFloor += 1
         # On initiation the column will create it's elevators    
+        elevatorID = 1
         for number in range(self.amountOfElevators):
-            elevatorID = 1
             elevator = Elevator(elevatorID, 'idle', self.amountOfFloors, 1)
             self.elevatorList.append(elevator)
             elevatorID += 1
