@@ -214,7 +214,3 @@ def Scenario3():
     elevator.requestFloor(2)
     print('...')
     print('User reaches floor', column.elevatorsList[1].currentFloor, 'and gets out')
-    
-    
-
-Scenario2()
