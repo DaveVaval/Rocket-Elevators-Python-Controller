@@ -79,9 +79,9 @@ class Elevator:
         self.floorRequestButtonList = []
         self.floorRequestList = []
         # On initiation the elevator will create it's own buttons
+        floorNumber = 1
+        floorRequestButtonID = 1
         for number in range(self.amountOfFloors):
-            floorNumber = 1
-            floorRequestButtonID = 1
             floorButton = FloorRequestButton(floorRequestButtonID, 'off', floorNumber)
             self.floorRequestButtonList.append(floorButton)
             floorNumber += 1
