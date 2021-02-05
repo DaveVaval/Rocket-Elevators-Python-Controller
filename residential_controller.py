@@ -163,7 +163,7 @@ def Scenario2():
     column.elevatorsList[0].currentFloor = 10
     column.elevatorsList[1].currentFloor = 3
     print('User is on floor 1 and wants to go up to floor 6')
-    elevator = column.requestElevator(6, 'up')
+    elevator = column.requestElevator(1, 'up')
     print('Elevator B is sent to floor:', column.elevatorsList[1].currentFloor)
     print('User enters the elevator and presses of floor 6')
     elevator.requestFloor(6)
@@ -173,7 +173,7 @@ def Scenario2():
     print('2 minutes later...')
     print()
     print('Another user is on floor 3 and wants to go up to floor 5')
-    elevator = column.requestElevator(5, 'up')
+    elevator = column.requestElevator(3, 'up')
     print('Elevator B is sent to floor:', column.elevatorsList[1].currentFloor)
     print('User enters the elevator and presses of floor 5')
     elevator.requestFloor(5)
@@ -214,3 +214,7 @@ def Scenario3():
     elevator.requestFloor(2)
     print('...')
     print('User reaches floor', column.elevatorsList[1].currentFloor, 'and gets out')
+    
+    
+
+Scenario2()
