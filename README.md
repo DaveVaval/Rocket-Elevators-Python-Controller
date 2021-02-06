@@ -1,6 +1,6 @@
 # Rocket Elevators Python Controller 
 
-![alt text]()
+![alt text](https://github.com/DaveVaval/Rocket-Elevators-Python-Controller/blob/Main/img/R3.png)
 
 Welcome to the Ruby controller for Rocket Elevators! 
 
