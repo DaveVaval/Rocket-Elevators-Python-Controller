@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/DaveVaval/Rocket-Elevators-Python-Controller/blob/Main/img/R3.png)
 
-Welcome to the Ruby controller for Rocket Elevators! 
+Welcome to the Python controller for Rocket Elevators! 
 
 - Python is a fun and really clean language. So far one of my favorite programming languages!
 
